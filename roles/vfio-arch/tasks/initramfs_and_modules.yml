@@ -1,0 +1,22 @@
+- name: make sure amd gpu drivers don't load before vfio_pci
+  copy:
+    src: files/amdgpupre.conf
+    dest: /etc/modprobe.d/amdgpupre.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+- name: make sure nvdia gpu drivers don't load before vfio_pci
+  copy:
+    src: files/nouveaupre.conf
+    dest: /etc/modprobe.d/nouveaupre.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+- name: remake initramfs boi
+  command: 'mkinitcpio -P'

@@ -1,0 +1,29 @@
+- name: try installing basic ansible dnf packages
+  dnf:
+    name: "{{ ansible_dnf_packages}}"
+    state: latest
+  register: basednfpkg
+
+- name: bootstrap fedoran when above fails
+  raw: dnf -y install python python-dnf libselinux-python
+  when: basednfpkg is failed
+
+- name: set selinux correctly
+  selinux:
+    state: disabled
+
+- name: good hat
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ good_packages }}"
+
+- name: better fedorini
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ bad_packages }}"
+
+...

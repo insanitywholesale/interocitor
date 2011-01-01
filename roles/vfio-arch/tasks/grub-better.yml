@@ -1,0 +1,39 @@
+---
+
+- name: back up OG grubbyboi
+  command: cp /etc/default/grub /etc/default/grub.bak
+  args:
+    creates: '/etc/default/grub.bak'
+
+- name: get default kernel params
+  shell: test -f /etc/default/grub.bak && . /etc/default/grub.bak || . /etc/default/grub ; echo $GRUB_CMDLINE_LINUX_DEFAULT | tr " " "\n"
+  register: grub_register_default_cmdline
+  changed_when: False
+  check_mode: False
+  when: grub_save_options
+
+- name: get oldman kernel params
+  shell: test -f /etc/default/grub.bak && . /etc/default/grub.bak || . /etc/default/grub ; echo $GRUB_CMDLINE_LINUX | tr " " "\n"
+  register: grub_register_old_cmdline
+  changed_when: False
+  check_mode: False
+  when: grub_save_options
+
+- name: set some kernel params
+  set_fact:
+    grub_fact_default_kernel_parameters: '{{ grub_register_default_cmdline.stdout_lines }}'
+    grub_fact_old_kernel_parameters:     '{{ grub_register_old_cmdline.stdout_lines }}'
+  when: grub_save_options
+
+- name: config /etc/default/grubbyboi
+  template:
+    src: templates/grub.j2
+    dest: /etc/default/grub
+    owner:  root
+    group:  root
+    mode:   0644
+
+- name: regenerate grub.cfg
+  command: 'grub-mkconfig -o /boot/grub/grub.cfg'
+
+...
