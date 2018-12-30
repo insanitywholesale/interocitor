@@ -16,14 +16,11 @@ good_packages:
   - vim
   - tmux
   - htop
-  - lsof
-  - git
   - initramfs-tools
-  - software-properties-common
 
 bad_packages:
-  - top
   - nano
+  - emacs
   - gedit
 
 ansible_apt_packages:
