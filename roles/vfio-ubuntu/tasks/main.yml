@@ -7,8 +7,8 @@
   register: baseaptpkg
 
 - name: bootstrap ubunut
-    raw: apt-get -y install "{{ ansible_apt_packages }}"
-  when: baseaptpkg|failed
+    raw: apt-get -y install aptitude python-apt python3-apt
+  when: baseaptpkg is failed
         
 - name: latest ubango
   apt:
@@ -98,7 +98,7 @@
     mode: 0644
     backup: yes
     force: yes
-  when: "{{ ansible_processor[1] }}" == "GenuineIntel"
+  when: ansible_processor[1] == "GenuineIntel"
   copy:
     src: files/grub-amd
     dest: /etc/default/grub
@@ -107,7 +107,7 @@
     mode: 0644
     backup: yes
     force: yes
-  when: "{{ ansible_processor[1] }}" == "AuthenticAMD"
+  when: ansible_processor[1] == "AuthenticAMD"
 
 - name: regenerate grub.cfg
   command: 'update-grub'
