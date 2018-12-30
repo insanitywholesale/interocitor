@@ -1,0 +1,30 @@
+---
+
+- import_tasks: base.yml
+
+- import_tasks: installvirt.yml
+
+- import_tasks: initramfs_and_modules.yml
+
+- import_tasks: grub.yml
+
+- name: add user to groups
+  user:
+    name: "{{ username }}"
+    groups: sudo,kvm,libvirt
+    append: yes
+
+- name: enable libvirtboi
+  service:
+    name: libvirtd
+    enabled: yes
+
+- name: download virtio drivers
+  get_url:
+    url: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.160-1/virtio-win.iso
+    dest: /var/lib/libvirt/images
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+    force: yes
