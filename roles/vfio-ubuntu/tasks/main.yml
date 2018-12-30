@@ -1,113 +1,12 @@
 ---
 
-- name: try installing basic ansible apt packages
-  apt:
-    name: "{{ ansible_apt_packages}}"
-    state: latest
-  register: baseaptpkg
+- import_tasks: base.yml
 
-- name: bootstrap ubunut
-  raw: apt-get update && apt-get -y install aptitude python-apt python3-apt
-  when: baseaptpkg is failed
+- import_tasks: installvirt.yml
 
-- name: good ubango
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "{{ good_packages }}"
+- import_tasks: initramfs_and_modules.yml
 
-- name: better ubango
-  package:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-    - "{{ bad_packages }}"
-
-- name: INSTALL VIRTUALIZATION (and gentoo but not right now)
-  package:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-   - "{{ vfio_packages }}"
-
-- name: get dat qemu.conf in place
-  copy:
-    src: files/qemu.conf
-    dest: /etc/libvirt/qemu.conf
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-
-- name: slap initramfsboi in position
-  copy:
-    src: files/modules
-    dest: /etc/initramfs-tools/modules
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-
-- name: slap initramfsboi in position - round 2
-  copy:
-    src: files/modules
-    dest: /etc/modules
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-    
-- name: make sure amd gpu drivers don't load before vfio_pci
-  copy:
-    src: files/amdgpupre.conf
-    dest: /etc/modprobe.d/amdgpupre.conf
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-
-- name: make sure nvdia gpu drivers don't load before vfio_pci
-  copy:
-    src: files/nouveaupre.conf
-    dest: /etc/modprobe.d/nouveaupre.conf
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-
-- name: remake the aforementioned boi
-  command: 'update-initramfs -u -k all'
-
-- name: if intel then set grubby boi
-  copy:
-    src: files/grub-intel
-    dest: /etc/default/grub
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-  when: ansible_processor[1] == "GenuineIntel" or ansible_processor[0] == "GenuineIntel"
-  
-- name: if amd then set grubby boi
-  copy:
-    src: files/grub-amd
-    dest: /etc/default/grub
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-  when: ansible_processor[1] == "AuthenticAMD" or ansible_processor[0] == "AuthenticAMD"
-
-- name: regenerate grub.cfg
-  command: 'update-grub'
+- import_tasks: grub.yml
 
 - name: add user to groups
   user:
@@ -120,12 +19,12 @@
     name: libvirtd
     enabled: yes
 
-#- name: download virtio drivers
-#  get_url:
-#    url: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.160-1/virtio-win.iso
-#    dest: /var/lib/libvirt/images
-#    owner: root
-#    group: root
-#    mode: 0644
-#    backup: no
-#    force: yes
+- name: download virtio drivers
+  get_url:
+    url: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.160-1/virtio-win.iso
+    dest: /var/lib/libvirt/images
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+    force: yes

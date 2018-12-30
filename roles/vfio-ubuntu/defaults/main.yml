@@ -6,9 +6,6 @@ username:
 vfio_packages:
   - qemu-system
   - libvirt-daemon
-  - libvirt-daemon-system
-  - libvirt-clients
-  - libvirt-dev
   - ovmf
   - virt-manager
 
@@ -16,11 +13,14 @@ good_packages:
   - vim
   - tmux
   - htop
+  - lsof
+  - git
   - initramfs-tools
+  - software-properties-common
 
 bad_packages:
+  - top
   - nano
-  - emacs
   - gedit
 
 ansible_apt_packages:
