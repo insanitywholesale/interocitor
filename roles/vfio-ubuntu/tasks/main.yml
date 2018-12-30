@@ -93,7 +93,7 @@
     mode: 0644
     backup: yes
     force: yes
-  when: ansible_processor[1] == "GenuineIntel"
+  when: ansible_processor[1] == "GenuineIntel" or ansible_processor[0] == "GenuineIntel"
   
 - name: if amd then set grubby boi
   copy:
@@ -104,7 +104,7 @@
     mode: 0644
     backup: yes
     force: yes
-  when: ansible_processor[1] == "AuthenticAMD"
+  when: ansible_processor[1] == "AuthenticAMD" or ansible_processor[0] == "AuthenticAMD"
 
 - name: regenerate grub.cfg
   command: 'update-grub'
