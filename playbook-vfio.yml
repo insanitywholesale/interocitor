@@ -1,0 +1,8 @@
+---
+
+- name: trying to set up vfio
+  hosts: ubangalo
+  roles: 
+    - ./roles/vfio-ubuntu
+
+...

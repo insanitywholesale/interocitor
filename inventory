@@ -1,0 +1,9 @@
+[ub]
+localhost.localdomain
+
+[ubangalo:children]
+ub
+
+[ubangalo:vars]
+ansible_user=root
+ansible_connection=local
