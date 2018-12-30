@@ -91,13 +91,23 @@
 
 - name: make grubby boi proper
   copy:
-    src: files/grub
+    src: files/grub-intel
     dest: /etc/default/grub
     owner: root
     group: root
     mode: 0644
     backup: yes
     force: yes
+  when: "{{ ansible_processor[1] }}" == "GenuineIntel"
+  copy:
+    src: files/grub-amd
+    dest: /etc/default/grub
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+  when: "{{ ansible_processor[1] }}" == "AuthenticAMD"
 
 - name: regenerate grub.cfg
   command: 'update-grub'
