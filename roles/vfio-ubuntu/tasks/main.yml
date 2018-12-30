@@ -3,17 +3,12 @@
 - name: try installing basic ansible apt packages
   apt:
     name: "{{ ansible_apt_packages}}"
-    state: present
+    state: latest
   register: baseaptpkg
 
 - name: bootstrap ubunut
-    raw: apt-get -y install aptitude python-apt python3-apt
+  raw: apt-get update && apt-get -y install aptitude python-apt python3-apt
   when: baseaptpkg is failed
-        
-- name: latest ubango
-  apt:
-    name: "*"
-    state: latest
 
 - name: good ubango
   package:
@@ -89,7 +84,7 @@
 - name: remake the aforementioned boi
   command: 'update-initramfs -u -k all'
 
-- name: make grubby boi proper
+- name: if intel then set grubby boi
   copy:
     src: files/grub-intel
     dest: /etc/default/grub
@@ -99,6 +94,8 @@
     backup: yes
     force: yes
   when: ansible_processor[1] == "GenuineIntel"
+  
+- name: if amd then set grubby boi
   copy:
     src: files/grub-amd
     dest: /etc/default/grub
@@ -123,12 +120,12 @@
     name: libvirtd
     enabled: yes
 
-- name: download virtio drivers
-  get_url:
-    url: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.160-1/virtio-win.iso
-    dest: /var/lib/libvirt/images
-    owner: root
-    group: root
-    mode: 0644
-    backup: no
-    force: yes
+#- name: download virtio drivers
+#  get_url:
+#    url: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.160-1/virtio-win.iso
+#    dest: /var/lib/libvirt/images
+#    owner: root
+#    group: root
+#    mode: 0644
+#    backup: no
+#    force: yes
