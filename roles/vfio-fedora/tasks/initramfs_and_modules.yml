@@ -1,17 +1,7 @@
 - name: slap initramfsboi in position
   copy:
     src: files/modules
-    dest: /etc/initramfs-tools/modules
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-    force: yes
-
-- name: slap initramfsboi in position - round 2
-  copy:
-    src: files/modules
-    dest: /etc/modules
+    dest: /etc/modprobe.d/vfio.conf
     owner: root
     group: root
     mode: 0644
