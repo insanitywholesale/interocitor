@@ -29,4 +29,4 @@
     force: yes
 
 - name: remake the aforementioned boi
-  command: 'dracut –f –kver `uname –r`'
+  command: 'dracut --force'

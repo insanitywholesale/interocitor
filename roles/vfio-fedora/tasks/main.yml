@@ -11,7 +11,7 @@
 - name: add user to groups
   user:
     name: "{{ username }}"
-    groups: sudo,kvm,libvirt
+    groups: wheel,kvm,libvirt
     append: yes
 
 - name: enable libvirtboi
