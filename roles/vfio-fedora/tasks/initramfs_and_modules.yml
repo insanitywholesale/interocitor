@@ -1,6 +1,6 @@
 - name: slap initramfsboi in position
   copy:
-    src: files/modules
+    src: files/vfio.conf
     dest: /etc/modprobe.d/vfio.conf
     owner: root
     group: root
