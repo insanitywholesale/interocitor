@@ -32,9 +32,10 @@
 GRUB_DEFAULT={{ grub_tpl_default }}
 
 {% if platform == "intel" %}
-{% set _ = grub_tpl_kernel_params.append('intel_iommu=on') %}
+{% set _ = grub_tpl_default_kernel_params.append('rd.driver.pre=vfio-pci intel_iommu=on') %}
 {% else %}
-{% set _ = grub_tpl_kernel_params.append('amd_iommu=on') %}
+{% set _ = grub_tpl_default_kernel_params.append('rd.driver.pre=vfio-pci amd_iommu=on') %}
+{% endif %}
 
 {% if grub_hidden_timeout %}
 GRUB_HIDDEN_TIMEOUT={{ grub_hidden_timeout }}
