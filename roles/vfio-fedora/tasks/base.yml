@@ -1,0 +1,25 @@
+- name: try installing basic ansible dnf packages
+  apt:
+    name: "{{ ansible_dnf_packages}}"
+    state: latest
+  register: basednfpkg
+
+- name: bootstrap fedoran when above fails
+  raw: dnf -y install python-dnf
+  when: basednfpkg is failed
+
+- name: good hat
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ good_packages }}"
+
+- name: better fedorini
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ bad_packages }}"
+
+...

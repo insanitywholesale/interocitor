@@ -1,0 +1,42 @@
+- name: slap initramfsboi in position
+  copy:
+    src: files/modules
+    dest: /etc/initramfs-tools/modules
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+- name: slap initramfsboi in position - round 2
+  copy:
+    src: files/modules
+    dest: /etc/modules
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+- name: make sure amd gpu drivers don't load before vfio_pci
+  copy:
+    src: files/amdgpupre.conf
+    dest: /etc/modprobe.d/amdgpupre.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+- name: make sure nvdia gpu drivers don't load before vfio_pci
+  copy:
+    src: files/nouveaupre.conf
+    dest: /etc/modprobe.d/nouveaupre.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+- name: remake the aforementioned boi
+  command: 'dracut –f –kver `uname –r`'

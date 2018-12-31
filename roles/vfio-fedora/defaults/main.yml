@@ -1,0 +1,23 @@
+---
+
+username:
+  - a
+
+vfio_packages:
+  - @virtualization
+
+good_packages:
+  - vim
+  - htop
+  - git
+
+bad_packages:
+  - top
+  - nano
+  - gedit
+  - emacs
+
+ansible_dnf_packages:
+  - python-dnf
+
+...
