@@ -4,7 +4,7 @@ username:
   - a
 
 vfio_packages:
-  - @virtualization
+  - '@virtualization'
 
 good_packages:
   - vim
@@ -18,6 +18,8 @@ bad_packages:
   - emacs
 
 ansible_dnf_packages:
+  - python
   - python-dnf
+  - libselinux-python
 
 ...

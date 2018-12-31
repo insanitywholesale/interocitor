@@ -1,11 +1,11 @@
 - name: try installing basic ansible dnf packages
-  apt:
+  dnf:
     name: "{{ ansible_dnf_packages}}"
     state: latest
   register: basednfpkg
 
 - name: bootstrap fedoran when above fails
-  raw: dnf -y install python-dnf
+  raw: dnf -y install python python-dnf libselinux-python
   when: basednfpkg is failed
 
 - name: good hat
