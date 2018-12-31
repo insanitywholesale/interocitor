@@ -1,5 +1,15 @@
 ---
 
+- name: is it intel
+  set_fact:
+    platform: 'intel'
+  when: ansible_processor[1] == "GenuineIntel" or ansible_processor[0] == "GenuineIntel"
+
+- name: or is it amd
+  set_fact:
+    platform: 'amd'
+  when: ansible_processor[1] == "AuthenticAMD" or ansible_processor[0] == "AuthenticAMD"
+
 - import_tasks: base.yml
 
 - import_tasks: installvirt.yml

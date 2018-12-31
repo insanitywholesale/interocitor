@@ -1,7 +1,6 @@
 ---
 
-username:
-  - 'a'
+username: a
 
 vfio_packages:
   - '@virtualization'
