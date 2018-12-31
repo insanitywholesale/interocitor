@@ -12,7 +12,7 @@
   check_mode: False
   when: grub_save_options
 
-- name: get oldmab kernel params
+- name: get oldman kernel params
   shell: test -f /etc/default/grub.bak && . /etc/default/grub.bak || . /etc/default/grub ; echo $GRUB_CMDLINE_LINUX | tr " " "\n"
   register: grub_register_old_cmdline
   changed_when: False
@@ -21,7 +21,7 @@
 
 - name: set some kernel params
   set_fact:
-    grub_fact_default_kernel_parameters: '{{ grub_register_default_cmdline.stdout_lines }}'
+    grub_fact_default_kernel_parameters: '{{ grub_register_default_cmdline.stdout_lines }} rd.driver.pre=vfio-pci'
     grub_fact_old_kernel_parameters:     '{{ grub_register_old_cmdline.stdout_lines }}'
   when: grub_save_options
 
