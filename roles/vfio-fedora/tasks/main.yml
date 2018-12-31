@@ -6,7 +6,7 @@
 
 - import_tasks: initramfs_and_modules.yml
 
-- import_tasks: grub.yml
+- import_tasks: grub-better.yml
 
 - name: add user to groups
   user:
