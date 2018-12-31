@@ -1,8 +1,9 @@
 ---
 
-- name: trying to set up vfio
-  hosts: ubangalo
+- name: mostly automatically set up vfio
+  hosts: you
   roles: 
     - ./roles/vfio-ubuntu
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
 ...
