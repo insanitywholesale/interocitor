@@ -8,6 +8,10 @@
   raw: dnf -y install python python-dnf libselinux-python
   when: basednfpkg is failed
 
+- name: set selinux correctly
+  selinux:
+    state: disabled
+
 - name: good hat
   package:
     name: "{{ item }}"
