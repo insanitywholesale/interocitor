@@ -26,7 +26,7 @@ ansible_dnf_packages:
 
 grub_save_options: True
 
-grub_kernel_options: []
+grub_kernel_options: ['']
 
 grub_dependent_kernel_options: []
 
