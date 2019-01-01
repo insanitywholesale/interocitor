@@ -26,6 +26,8 @@ ansible_dnf_packages:
 
 grub_save_options: True
 
+# here is where you put your gpu IDs between the single quotes
+# example grub_kernel_options: ['']
 grub_kernel_options: ['']
 
 grub_dependent_kernel_options: []
