@@ -1,4 +1,0 @@
-GRUB_DEFAULT=0
-GRUB_TIMEOUT_STYLE=hidden
-GRUB_TIMEOUT=5
-GRUB_CMDLINE_LINUX_DEFAULT="amd_iommu=on intel_iommu=on vfio-pci.ids=1002:67ef,1002:aae0"
