@@ -12,7 +12,6 @@ good_packages:
   - vim
   - tmux
   - htop
-  - lsof
   - git
   - initramfs-tools
 
