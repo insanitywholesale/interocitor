@@ -3,7 +3,10 @@
 username: a
 
 vfio_packages:
-  - '@virtualization'
+  - libvirt
+  - qemu
+  - edk2-ovmf
+  - virt-manager
 
 good_packages:
   - vim
