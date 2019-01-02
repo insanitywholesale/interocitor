@@ -16,11 +16,11 @@
     state: latest
   register: baseaptpkg
 
-- name: bootstrap ubunut when above fails
+- name: bootstrap deborah when above fails
   raw: apt-get update && apt-get -y install aptitude python-apt python3-apt
   when: baseaptpkg is failed
 
-- name: good ubango
+- name: good debs
   package:
     name: "{{ item }}"
     state: present
@@ -29,7 +29,7 @@
 
 # add task to disable or remove apparmor
 
-- name: better ubango
+- name: better debungalo
   package:
     name: "{{ item }}"
     state: absent
