@@ -5,6 +5,7 @@ username: a
 vfio_packages:
   - qemu-system
   - libvirt-daemon
+  - libvirt-daemon-system
   - ovmf
   - virt-manager
 
@@ -27,9 +28,9 @@ ansible_apt_packages:
 
 grub_save_options: True
 
-# here is where you put your gpu IDs between the single quotes
-# example grub_kernel_options: ['']
-grub_kernel_options: ['']
+# here is where you put your gpu IDs between the single quotes after the equal sign
+# example grub_kernel_options: ['vfio-pci.ids=1002:67ef,1002:aae0']
+grub_kernel_options: ['vfio-pci.ids=']
 
 grub_dependent_kernel_options: []
 
