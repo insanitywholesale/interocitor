@@ -33,4 +33,7 @@
     group:  root
     mode:   0644
 
+- name: regenerate grub.cfg
+command: 'update-grub'
+
 ...
