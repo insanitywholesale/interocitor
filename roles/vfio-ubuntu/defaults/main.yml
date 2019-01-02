@@ -6,6 +6,8 @@ vfio_packages:
   - qemu-system
   - libvirt-daemon
   - libvirt-daemon-system
+  - libvirt-clients
+  - libvirt-dev
   - ovmf
   - virt-manager
 
