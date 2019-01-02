@@ -33,4 +33,10 @@
     group:  root
     mode:   0644
 
+- name: regenerate grub.cfg
+  command: 'grub2-mkconfig -o /boot/grub2/grub.cfg'
+
+- name: same as above but for uefi
+command: 'grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
+
 ...
