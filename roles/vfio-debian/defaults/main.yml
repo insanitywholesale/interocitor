@@ -1,0 +1,67 @@
+---
+
+username: a
+
+vfio_packages:
+  - qemu-system
+  - libvirt-daemon
+  - ovmf
+  - virt-manager
+
+good_packages:
+  - vim
+  - tmux
+  - htop
+  - git
+  - initramfs-tools
+
+bad_packages:
+  - top
+  - nano
+  - gedit
+
+ansible_apt_packages:
+  - aptitude
+  - python-apt
+  - python3-apt
+
+grub_save_options: True
+
+# here is where you put your gpu IDs between the single quotes
+# example grub_kernel_options: ['']
+grub_kernel_options: ['']
+
+grub_dependent_kernel_options: []
+
+grub_default: ''
+
+grub_dependent_default: ''
+
+grub_timeout_hardware: 5
+
+grub_timeout_virtual: 1
+
+# GRUB timeout to wait for a key to be pressed to show the menu.
+# Set to false to not set a hidden timeout and show the menu
+# without pressing a key first.
+grub_hidden_timeout: '{{ 0 if ansible_distribution in ["Ubuntu"] else False }}'
+                                                                   # ]]]
+# Suppress the countdown while waiting for a key to show the menu.
+grub_hidden_timeout_quiet: 'true'
+
+# GRUB terminal(s) to use. Set to false to use the platform
+# specific default.
+grub_terminal: '{{ "serial console" if grub_serial_console else False }}'
+
+# Additional GRUB options specified as a YAML text block.
+grub_custom_options: ''
+
+# Enable serial console (in both grub and kernel)
+grub_serial_console: False
+
+grub_serial_console_unit: 0
+
+# Speed of the serial port.
+grub_serial_console_speed: 115200
+
+...

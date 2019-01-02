@@ -1,0 +1,27 @@
+- name: try installing basic ansible apt packages
+  apt:
+    name: "{{ ansible_apt_packages}}"
+    state: latest
+  register: baseaptpkg
+
+- name: bootstrap ubunut when above fails
+  raw: apt-get update && apt-get -y install aptitude python-apt python3-apt
+  when: baseaptpkg is failed
+
+- name: good ubango
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ good_packages }}"
+
+# add task to disable or remove apparmor
+
+- name: better ubango
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ bad_packages }}"
+
+...

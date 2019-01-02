@@ -2,7 +2,11 @@
 
 - name: mostly automatically set up vfio
   hosts: you
+  gather_facts: true
   roles:
-    - ./roles/vfio-fedora
+    - { role: ./roles/vfio-debian, when: ansible_distribution == "Debian" }
+    - { role: ./roles/vfio-ubuntu, when: ansible_distribution == "Ubuntu" }
+    - { role: ./roles/vfio-fedora, when: ansible_distribution == "Fedora" }
+
 
 ...

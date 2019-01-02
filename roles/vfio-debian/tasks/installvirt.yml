@@ -1,0 +1,20 @@
+---
+
+- name: INSTALL VIRTUALIZATION (and gentoo but not right now)
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+   - "{{ vfio_packages }}"
+
+- name: get dat qemu.conf in place
+  copy:
+    src: files/qemu.conf
+    dest: /etc/libvirt/qemu.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    force: yes
+
+...
