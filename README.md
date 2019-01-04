@@ -36,9 +36,9 @@ sudo pacman -S git ansible
 ## Using the Interocitor
 
 1. clone this repository
-- ```git clone https://github.com/insanitywholesale/roley-boiz```
+- ```git clone https://github.com/insanitywholesale/interocitor```
 2. go into it
-- ```cd roley-boiz```
+- ```cd interocitor```
 3. edit the variables (username and grub_kernel_options) in defaults/main.yml for your distro
 - ```vi roles/vfio-arch/defaults/main.yml```
 4. run the thing

@@ -1,25 +1,21 @@
 - name: try installing basic ansible dnf packages
   dnf:
-    name: "{{ ansible_dnf_packages}}"
+    name: "{{ ansible_pacman_packages}}"
     state: latest
-  register: basednfpkg
+  register: basepacmanpkg
 
-- name: bootstrap fedoran when above fails
-  raw: dnf -y install python python-dnf libselinux-python
-  when: basednfpkg is failed
+- name: bootstrap archieboi when above fails
+  raw: pacman -S python
+  when: basepacmanpkg is failed
 
-- name: set selinux correctly
-  selinux:
-    state: disabled
-
-- name: good hat
+- name: good curve
   package:
     name: "{{ item }}"
     state: present
   with_items:
     - "{{ good_packages }}"
 
-- name: better fedorini
+- name: better bow
   package:
     name: "{{ item }}"
     state: absent
