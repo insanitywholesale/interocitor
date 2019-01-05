@@ -18,5 +18,7 @@
     backup: yes
     force: yes
 
+- name: do the module dance
+
 - name: remake initramfs boi
   command: 'mkinitcpio -P'

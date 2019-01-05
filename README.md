@@ -49,6 +49,6 @@ sudo pacman -S git ansible
 
 #### Additional Notes
 
-- if you're running debian, just comment out the rest, the ansible version in the repos is too old. installing ansible using pip might work but it hasn't been tested.
+- if you're running debian, just comment out the rest, the ansible version in the repos is too old. installing ansible using pip does work but you're introducing a package that is being handled by pip and not the actual package manager. this is a solution that does work but it's up to you to decide if you want to comment out a few lines or install using pip.
 - fedora is a but weird and if you don't install the two additional packages listed above, it doesn't work. in addition, since python isn't there, ansible can't run anything so I can't even added to the required packages list. if you have a fix, feel free to share it.
 - arch support is experimental right now (should theoretically work) hasn't been tested like the rest of the distros so until this warning is removed, don't complain about it.

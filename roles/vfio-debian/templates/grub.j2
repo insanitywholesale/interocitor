@@ -36,8 +36,8 @@ GRUB_TIMEOUT={{ grub_timeout_hardware }}
 {% else %}
 GRUB_TIMEOUT={{ grub_timeout_virtual }}
 {% endif %}
-GRUB_CMDLINE_LINUX_DEFAULT="{{ grub_tpl_default_kernel_params | join(' ')}}"
-GRUB_CMDLINE_LINUX="{{ grub_tpl_kernel_params | join(' ') }}"
+GRUB_CMDLINE_LINUX_DEFAULT="{{ grub_tpl_kernel_params | join(' ')}}"
+GRUB_CMDLINE_LINUX=""
 {% if grub_terminal %}
 GRUB_TERMINAL="{{ grub_terminal }}"
 {% endif %}
