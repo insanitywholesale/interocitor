@@ -39,6 +39,14 @@
   set_fact:
     mkinitcpio_fact_old_modules: '{{ mkinitcpio_register_old_modules.stdout_lines }}'
     mkinitcpio_fact_old_hooks: '{{ mkinitcpio_register_old_hooks.stdout_lines }}'
+ 
+- name: config mkinitcpio
+  template:
+    src: templates/mkinitcpio.j2
+    dest: /etc/mkinitcpio.conf
+    owner:  root
+    group:  root
+    mode:   0644
 
 - name: remake initramfs boi
   command: 'mkinitcpio -P'

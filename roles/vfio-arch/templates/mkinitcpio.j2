@@ -1,9 +1,2 @@
-#{% set mkinitcpio_old_mod = [] %}
-#{% set mkinitcpio_old_mod = mkinitcpio_fact_old_modules %}
-#{% set mkinitcpio_new_mod = [] %}
-#{% set mkinitcpio_vfio_mod = mkinitcpio_vfio_modules %}
-#{% set _ = mkinitcpio_new_mod.append('vfio_pci vfio vfio_iommu_type1 vfio_virqfd') %}
-#{% set mkinitcpio_new_mod = ((mkinitcpio_vfio_mod + mkinitcpio_old_mod) | sort | unique) %}
-#MODULES=("{{ mkinitcpio_new_mod | join(' ')}}")
-
-HOOKS=({{ mkinitcpio_old_hooks }})
+MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
+HOOKS=({{ mkinitcpio_fact_old_hooks | join(' ')}})
