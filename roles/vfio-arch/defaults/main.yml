@@ -22,6 +22,8 @@ bad_packages:
 ansible_pacman_packages:
   - python
 
+mkinitcpio_vfio_modules: ['vfio_pci vfio vfio_iommu_type1 vfio_virqfd']
+
 grub_save_options: True
 
 # here is where you put your gpu IDs between the single quotes after the equal sign
