@@ -18,7 +18,27 @@
     backup: yes
     force: yes
 
+- name: back up OG mkinitcpio
+  command: cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.bak
+  args:
+    creates: '/etc/mkinitcpio.conf.bak'
+
 - name: do the module dance
+  shell: test -f /etc/mkinitcpio.conf.bak && . /etc/mkinitcpio.conf.bak || . /etc/mkinitcpio.conf ; echo "${MODULES[*]}" | tr " " "\n"
+  register: mkinitcpio_register_old_modules
+  changed_when: False
+  check_mode: False
+
+- name: hooky loopy
+  shell: test -f /etc/mkinitcpio.conf.bak && . /etc/mkinitcpio.conf.bak || . /etc/mkinitcpio.conf ; echo "${HOOKS[*]}" | tr " " "\n"
+  register: mkinitcpio_register_old_hooks
+  changed_when: False
+  check_mode: False
+
+- name: set some mkinitcpio params
+  set_fact:
+    mkinitcpio_fact_old_modules: '{{ mkinitcpio_register_old_modules.stdout_lines }}'
+    mkinitcpio_fact_old_hooks: '{{ mkinitcpio_register_old_hooks.stdout_lines }}'
 
 - name: remake initramfs boi
   command: 'mkinitcpio -P'

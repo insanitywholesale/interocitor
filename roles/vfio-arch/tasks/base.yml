@@ -1,5 +1,5 @@
-- name: try installing basic ansible dnf packages
-  dnf:
+- name: try installing basic ansible pacman packages
+  pacman:
     name: "{{ ansible_pacman_packages}}"
     state: latest
   register: basepacmanpkg

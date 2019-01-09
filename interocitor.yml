@@ -7,6 +7,6 @@
     - { role: ./roles/vfio-debian, when: ansible_distribution == "Debian" }
     - { role: ./roles/vfio-ubuntu, when: ansible_distribution == "Ubuntu" }
     - { role: ./roles/vfio-fedora, when: ansible_distribution == "Fedora" }
-    - { role: ./roles/vfio-arch, when: ansible_distribution == "Arch" }
+    - { role: ./roles/vfio-arch, when: ansible_distribution == "Archlinux" }
 
 ...
