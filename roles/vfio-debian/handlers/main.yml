@@ -1,0 +1,6 @@
+---
+
+- name: remake initramfs boi
+  command: 'update-initramfs -u -k all'
+
+...

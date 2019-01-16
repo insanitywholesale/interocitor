@@ -7,6 +7,8 @@
     mode: 0644
     backup: yes
     force: yes
+  notify:
+     - remake initramfs boi
 
 - name: slap initramfsboi in position - round 2
   copy:
@@ -17,6 +19,8 @@
     mode: 0644
     backup: yes
     force: yes
+  notify:
+     - remake initramfs boi
 
 - name: make sure amd gpu drivers don't load before vfio_pci
   copy:
@@ -27,6 +31,8 @@
     mode: 0644
     backup: yes
     force: yes
+  notify:
+     - remake initramfs boi
 
 - name: make sure nvdia gpu drivers don't load before vfio_pci
   copy:
@@ -37,6 +43,7 @@
     mode: 0644
     backup: yes
     force: yes
+  notify:
+     - remake initramfs boi
 
-- name: remake the aforementioned boi
-  command: 'update-initramfs -u -k all'
+...
