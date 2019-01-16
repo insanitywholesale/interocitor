@@ -47,6 +47,6 @@
     owner:  root
     group:  root
     mode:   0644
+  notify:
+     - remake initramfs boi
 
-- name: remake initramfs boi
-  command: 'mkinitcpio -P'
