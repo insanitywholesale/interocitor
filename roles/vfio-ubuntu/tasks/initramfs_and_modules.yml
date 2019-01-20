@@ -37,6 +37,7 @@
     mode: 0644
     backup: yes
     force: yes
+
 - name: make sure nvdia gpu drivers don't load before vfio_pci - round 2
   copy:
     src: files/nvidiapre.conf
