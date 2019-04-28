@@ -8,8 +8,8 @@
    - "{{ vfio_packages }}"
 
 - name: get dat qemu.conf in place
-  copy:
-    src: files/qemu.conf
+  template:
+    src: files/qemu.conf.j2
     dest: /etc/libvirt/qemu.conf
     owner: root
     group: root
