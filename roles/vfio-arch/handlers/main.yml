@@ -1,6 +1,0 @@
----
-
-- name: remake initramfs boi
-  command: 'mkinitcpio -P'
-
-...

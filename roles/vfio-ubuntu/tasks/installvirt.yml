@@ -9,7 +9,7 @@
 
 - name: get dat qemu.conf in place
   template:
-    src: files/qemu.conf.j2
+    src: templates/qemu.conf.j2
     dest: /etc/libvirt/qemu.conf
     owner: root
     group: root
